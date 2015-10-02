@@ -3,7 +3,7 @@
 <% def stat_norm=0;def stat_bas=0;def stat_haut=0; %>
 
 <br/>
-${affichage.size}
+<span>${affichage.size()} comptes chargés</span>
 <div style="vertical-align:middle;text-align: center;display: inline-block;">
     <table class="hoverTable">
         <thead>
@@ -17,11 +17,11 @@ ${affichage.size}
                 <td>${compte.value.service}</td>
                 <td>${compte.value.forfait}</td>
                 <g:if test="${compte.value.montant>(compte.value.forfait*Double.valueOf(haut))}">
-                    <td style="background-color: #D44937;">${compte.value.montant}</td>
+                    <td style="background-color: #D44937;">${compte.value.montant.trunc(2)}</td>
                     <% stat_haut++ %>
                 </g:if>
                 <g:elseif test="${compte.value.montant>(compte.value.forfait*Double.valueOf(bas))}">
-                    <td style="background-color: #FE9D0F;">${compte.value.montant}</td>
+                    <td style="background-color: #FE9D0F;">${compte.value.montant.trunc(2)}</td>
                     <% stat_bas++ %>
                 </g:elseif>
                 <g:else>

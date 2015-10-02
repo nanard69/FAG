@@ -39,9 +39,9 @@ class FagController {
                 compte_pers = comptes.findResult { it.compte == row[34] ? it : null }
                 if (compte_pers != null) {
                     if (affichage.get(row[34]) != null) {
-                        compte_pers.setMontant(Double.valueOf(row[129].replace(',', '.')) + (affichage.get(row[34])).montant);
+                        compte_pers.setMontant(Double.valueOf(row[70].replace(',', '.')) + (affichage.get(row[34])).montant);
                     } else {
-                        compte_pers.setMontant(Double.valueOf(row[129].replace(',', '.')));
+                        compte_pers.setMontant(Double.valueOf(row[70].replace(',', '.')));
                     }
                     affichage.put(row[34], compte_pers);
                 }
@@ -75,18 +75,18 @@ class FagController {
 
         rendu.setResponseHeaders(response);
         rendu.fillHeader(headers);
-        def i=0
-        def totalht=0;
+        def i=1
+        def totalht=0d;
 
         services.each {
             key, value ->
-                rendu.fillRow(['TELECOM',key,value,value*tva],i);
+                rendu.fillRow(['TELECOM',key,value,(value*tva).trunc(2)],i);
                 i++;
-                totalht=totalht+value;
+                totalht=totalht+((Double)value).toString();
         }
 
-        rendu.putCellValue(i+2, 2, totalht + " HT")
-        rendu.putCellValue(i+2, 3, totalht*tva + " TTC")
+        rendu.putCellValue(i+2, 2, totalht.trunc(2) + " HT")
+        rendu.putCellValue(i+2, 3, (totalht*tva).trunc(2) + " TTC")
         rendu.save(response.outputStream)
     }
 }
