@@ -3,7 +3,6 @@
 <% def stat_norm=0;def stat_bas=0;def stat_haut=0; %>
 
 <br/>
-<span>${affichage.size()} comptes chargés</span>
 <div style="vertical-align:middle;text-align: center;display: inline-block;">
     <table class="hoverTable">
         <thead>
