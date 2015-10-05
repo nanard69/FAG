@@ -20,10 +20,17 @@
 </div>
 
 <div id="list-comptes" class="content" role="main">
-    <h1><g:message code="default.list.label" args="[entityName]"/></h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
+    <fieldset class="form">
+        <g:form action="list" method="GET">
+            <div class="fieldcontain">
+                <label for="query">Chercher un compte:</label>
+                <g:textField name="query" value="${params.query}"/>
+            </div>
+        </g:form>
+    </fieldset>
     <table>
         <thead>
         <tr>
